@@ -18,7 +18,7 @@ public class BookStoreClient {
 			
 		public static void main (String args[]) throws Exception { 
 	
-	        ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
+	        ApplicationContext context = new ClassPathXmlApplicationContext("pom.xml");
 	        System.out.println("***************** Application Context instantiated! ******************");
 
 	        //Spring to inject the right object implementation in CustomerService for customer using Setter Injection
