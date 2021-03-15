@@ -119,7 +119,7 @@ public class BookStoreClient {
 
 			
 			Bank bookStore = new Bank();
-			transactionHandler paymentHandler = new transactionHandler();
+			
 			
 			System.out.println("\n");
 			System.out.println("Please press 1 to pay with card or 2 to pay with check");
@@ -150,8 +150,9 @@ public class BookStoreClient {
 
 			paymentProfile clientCard = new paymentProfile(ccNumber, exp, sec, ccName, zip);
 
+			transactionHandler paymentHandler = new transactionHandler(clientCard, order1, bookStore);
 
-			Payment orderPayment = new Payment(clientCard, bookStore, paymentHandler, order1);
+			Payment orderPayment = new Payment(paymentHandler, order1);
 			System.out.println("\n");
 			System.out.println("Thank you for adding your card " + ccName);
 			System.out.println(orderPayment.intializePayment());
@@ -186,7 +187,10 @@ public class BookStoreClient {
 
 				paymentProfile clientCheck = new paymentProfile(checkNum, today, writer, checkaddress, storeName, For, notes, routing, account);
 				
-				Payment orderPayment2 = new Payment(clientCheck, bookStore, paymentHandler, order1);
+
+				transactionHandler paymentHandler = new transactionHandler(clientCheck, order1, bookStore);
+
+				Payment orderPayment2 = new Payment(paymentHandler, order1);
 				System.out.println("\n");
 				System.out.println(orderPayment2.intializePayment());
 

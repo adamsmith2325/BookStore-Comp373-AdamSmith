@@ -15,15 +15,15 @@ public class Payment {
     Integer paymentID; //Would be stored as auto-incrementing in DB, going to leave as 999 for purposes of this exercise
     paymentProfile Payer;
     Bank Payee;
-    transactionHandler Transaction = new transactionHandler();
     String orderID;
     Order order;
+    transactionHandler Transaction = new transactionHandler(Payer, order, Payee);
 
 
-    public Payment(paymentProfile customer, Bank store, transactionHandler payment, Order order) {
+    public Payment(transactionHandler payment, Order order) {
 
-        this.Payer = customer;
-        this.Payee = store;
+        this.Payer = payment.Payer;
+        this.Payee = payment.Payee;
         this.Transaction = payment;
         this.orderID = order.getOrderId();
         this.order = order;
