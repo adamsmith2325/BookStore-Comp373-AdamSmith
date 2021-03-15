@@ -12,6 +12,7 @@ import bookStoreSpring2AdamSmithLUC.model.order.Order;
 
 public class Payment {
     
+    Integer paymentID; //Would be stored as auto-incrementing in DB, going to leave as 999 for purposes of this exercise
     paymentProfile Payer;
     Bank Payee;
     transactionHandler Transaction = new transactionHandler();
@@ -25,7 +26,7 @@ public class Payment {
         this.Payee = store;
         this.Transaction = payment;
         this.orderID = order.getOrderId();
-
+        this.paymentID = 999; //Again this would be based upon feedback from the database, I would not actually put this line in real code
     }
 
     public String intializePayment(){
@@ -33,6 +34,7 @@ public class Payment {
         Transaction.Payer = Payer;
         Transaction.amount = order.getOrderTotal();
         Transaction.transactiontime = LocalDateTime.now();
+        Transaction.submitTransaction();
 
         return "Your transaction for " + order.getOrderTotal() + " has been intialized. Thank you for doing business with us!";
     }
@@ -48,13 +50,11 @@ public class Payment {
             status = "There was an error with your payment. Please contact support immediately at 888-888-8888";
         } 
 
-
-
         return status;
     }
 
-    public String findPayment() {
-        
+    public String findPayment(Integer ID) {
+        return "Test Find Complete"; //As I said previously, this would be hooked up to a database where I'd use a DAO to query the database to pull this payment record
     }
 
 
