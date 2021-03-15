@@ -105,7 +105,9 @@ public class BookStoreClient {
 	        	}
 	        	double orderTotal = order.getOrderTotal();
 		        System.out.println("\n\tOrder Total:\t\t" + orderTotal);
-	        }          
+	        }
+
+			
 		}
 
 }
