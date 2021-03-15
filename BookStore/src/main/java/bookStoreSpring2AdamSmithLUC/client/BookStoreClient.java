@@ -121,40 +121,42 @@ public class BookStoreClient {
 			Bank bookStore = new Bank();
 			transactionHandler paymentHandler = new transactionHandler();
 			
+			System.out.println("\n");
 			System.out.println("Please press 1 to pay with card or 2 to pay with check");
 			Integer payMethod = keyboard.nextInt();
-			/*
-			while (payMethod != 1 || payMethod != 2){
-				
-				System.out.println("Please press 1 to pay with card or 2 to pay with check");
-				Integer payMethod = keyboard.nextInt();
 
-		}
-		*/
 
 		if(payMethod == 1){
-
 			System.out.println("Please enter the name of the card holder"); //, credit card number, expiration date, security code, and billing zip code
-			String ccName = keyboard.nextLine();
+			String ccName = "Michael Gerard";
+			System.out.println("Michael Gerard");
 
 			System.out.println("Please enter your credit card number");
-			String ccNumber = keyboard.nextLine();
+			String ccNumber = "1234567890";
+			System.out.println("1234567890");
 
 			System.out.println("Please enter your expiration date");
-			String exp = keyboard.nextLine();
+			String exp = "09/24";
+			System.out.println("09/24");
 
 			System.out.println("Please enter your security code");
-			Integer sec = keyboard.nextInt();
+			Integer sec = 124;
+			System.out.println("124");
 
 			System.out.println("Please enter your billing zip code");
-			String zip = keyboard.nextLine();
+			String zip = "66610";
+			System.out.println("66610");
+			
 
 			paymentProfile clientCard = new paymentProfile(ccNumber, exp, sec, ccName, zip);
 
+
 			Payment orderPayment = new Payment(clientCard, bookStore, paymentHandler, order1);
+			System.out.println("\n");
+			System.out.println("Thank you for adding your card " + ccName);
 			System.out.println(orderPayment.intializePayment());
-
-
+			System.out.println("\n");
+			
 			} else if(payMethod == 2) {
 
 				System.out.println("Please enter the name of the card holder");
@@ -181,13 +183,14 @@ public class BookStoreClient {
 				String For = "Order Number " + order1.getOrderId();
 
 
+
 				paymentProfile clientCheck = new paymentProfile(checkNum, today, writer, checkaddress, storeName, For, notes, routing, account);
 				
 				Payment orderPayment2 = new Payment(clientCheck, bookStore, paymentHandler, order1);
 				System.out.println("\n");
 				System.out.println(orderPayment2.intializePayment());
 
-
+				keyboard.close();
 		}
 	
 	}
