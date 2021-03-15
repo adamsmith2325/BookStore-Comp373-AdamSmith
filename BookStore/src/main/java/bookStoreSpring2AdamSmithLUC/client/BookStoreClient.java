@@ -1,5 +1,6 @@
 package bookStoreSpring2AdamSmithLUC.client;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.BeanFactory;
@@ -13,11 +14,20 @@ import bookStoreSpring2AdamSmithLUC.model.order.OrderDetail;
 import bookStoreSpring2AdamSmithLUC.model.product.Book;
 import bookStoreSpring2AdamSmithLUC.model.product.Product;
 import bookStoreSpring2AdamSmithLUC.model.service.CustomerService;
+import jdk.internal.util.xml.impl.Input;
+import java.util.Scanner;
+
+import bookStoreSpring2AdamSmithLUC.model.payment.Bank;
+import bookStoreSpring2AdamSmithLUC.model.payment.Payment;
+import bookStoreSpring2AdamSmithLUC.model.payment.paymentProfile;
+import bookStoreSpring2AdamSmithLUC.model.payment.transactionHandler;
 
 public class BookStoreClient {
 			
 		public static void main (String args[]) throws Exception { 
-	
+			
+			Scanner keyboard = new Scanner(System.in);
+
 	        ApplicationContext context = new ClassPathXmlApplicationContext("app-context.xml");
 	        System.out.println("***************** Application Context instantiated! ******************");
 
@@ -108,6 +118,77 @@ public class BookStoreClient {
 	        }
 
 			
-		}
+			Bank bookStore = new Bank();
+			transactionHandler paymentHandler = new transactionHandler();
+			
+			System.out.println("Please press 1 to pay with card or 2 to pay with check");
+			Integer payMethod = keyboard.nextInt();
+			/*
+			while (payMethod != 1 || payMethod != 2){
+				
+				System.out.println("Please press 1 to pay with card or 2 to pay with check");
+				Integer payMethod = keyboard.nextInt();
 
+		}
+		*/
+
+		if(payMethod == 1){
+
+			System.out.println("Please enter the name of the card holder"); //, credit card number, expiration date, security code, and billing zip code
+			String ccName = keyboard.nextLine();
+
+			System.out.println("Please enter your credit card number");
+			String ccNumber = keyboard.nextLine();
+
+			System.out.println("Please enter your expiration date");
+			String exp = keyboard.nextLine();
+
+			System.out.println("Please enter your security code");
+			Integer sec = keyboard.nextInt();
+
+			System.out.println("Please enter your billing zip code");
+			String zip = keyboard.nextLine();
+
+			paymentProfile clientCard = new paymentProfile(ccNumber, exp, sec, ccName, zip);
+
+			Payment orderPayment = new Payment(clientCard, bookStore, paymentHandler, order1);
+			System.out.println(orderPayment.intializePayment());
+
+
+			} else if(payMethod == 2) {
+
+				System.out.println("Please enter the name of the card holder");
+				String checkNum = keyboard.nextLine();
+
+				System.out.println("Please enter your name");
+				String writer = keyboard.nextLine();
+
+				System.out.println("Please enter your address");
+				String checkaddress = keyboard.nextLine();
+
+				System.out.println("Add any notes you would like on the check. If none, please press enter");
+				String notes= keyboard.nextLine();
+
+				System.out.println("What is your routing number?");
+				String routing = keyboard.nextLine();
+
+				System.out.println("What is your account number?");
+				String account = keyboard.nextLine();
+
+
+				LocalDate today = LocalDate.now();
+				String storeName = "Adam's Books";
+				String For = "Order Number " + order1.getOrderId();
+
+
+				paymentProfile clientCheck = new paymentProfile(checkNum, today, writer, checkaddress, storeName, For, notes, routing, account);
+				
+				Payment orderPayment2 = new Payment(clientCheck, bookStore, paymentHandler, order1);
+				System.out.println("\n");
+				System.out.println(orderPayment2.intializePayment());
+
+
+		}
+	
+	}
 }

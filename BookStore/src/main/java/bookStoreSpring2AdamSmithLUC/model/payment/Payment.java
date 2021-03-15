@@ -26,6 +26,7 @@ public class Payment {
         this.Payee = store;
         this.Transaction = payment;
         this.orderID = order.getOrderId();
+        this.order = order;
         this.paymentID = 999; //Again this would be based upon feedback from the database, I would not actually put this line in real code
     }
 
@@ -36,7 +37,7 @@ public class Payment {
         Transaction.transactiontime = LocalDateTime.now();
         Transaction.submitTransaction();
 
-        return "Your transaction for " + order.getOrderTotal() + " has been intialized. Thank you for doing business with us!";
+        return "Order Number: " + order.getOrderId() + " for " + order.getOrderTotal() + " has been intialized. Thank you for doing business with us!";
     }
 
     public String validatePayment(){

@@ -1,6 +1,6 @@
 package bookStoreSpring2AdamSmithLUC.model.payment;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 enum paymentType {CARD, CHECK}
 
@@ -35,7 +35,7 @@ public class paymentProfile {
 
     //Check Atrributes
     String checkNumber;
-    Date checkDate;
+    LocalDate checkDate;
     String checkIssuer;
     String issuerAddress;
     String CheckPayee;
@@ -58,7 +58,7 @@ public class paymentProfile {
 
     }
 
-    public paymentProfile(String num, Date date, String issuer, String addy, String payee, String For, String notes, String routing, String account) {
+    public paymentProfile(String num, LocalDate date, String issuer, String addy, String payee, String For, String notes, String routing, String account) {
 
         this.paymentMethod = paymentType.CHECK;
         this.checkNumber = num;
